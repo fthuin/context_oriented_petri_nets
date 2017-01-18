@@ -1,0 +1,97 @@
+\begin{frame}[noframenumbering,plain]
+    \begin{figure}[!ht]
+        \centering
+        \scriptsize
+        \begin{tikzpicture}[node distance=1.5cm, >=stealth',bend angle=45,auto]
+            % WiFi PART
+
+            \node[transition,									label=above:req(W)] (t1) {};
+            \node[dplace,right of=t1,tokens=0,label=below:Pr(W)] (p1) {};
+            \node[rbtransition, right of=p1,		label=above:act(W)] (t2) {};
+            \node[place, right of=t2,tokens=0,label=below:W] (p2) {};
+            \node[transition, right of=p2,		label=above:req($\lnot$W)] (t3) {};
+            \node[dplace,right of=t3,tokens=0,label=below:Pr($\lnot$W)] (p3) {};
+            \node[btransition, right of=p3,		label=below:deac(W)] (t4) {};
+
+            \path[-latex] (t1) edge node {} (p1);
+            \path[-latex] (p1) edge node {} (t2);
+            \path[-latex] (t2) edge node {} (p2);
+            \path[-latex] (p2) edge[bend left=45] node {} (t4);
+            \path[-latex] (t3) edge node {} (p3);
+            \path[-latex] (p3) edge node {} (t4);
+
+
+            % AudioStream PART
+
+            \node[transition,below =1.75cm of t1,  label=above:req(A)] (t13) {};
+            \node[dplace, below = 1.75cm of p1,    label=below:Pr(A)] (p10) {};
+            \node[btransition, right of=p10,    label=above:act(A)] (t14) {};
+            \node[place, right of=t14,tokens=0, label=below:A] (p11) {};
+            \node[transition, right of=p11,		label=above:req($\lnot$A)] (t15) {};
+            \node[dplace, below =1.75cm of p3,     label=below:Pr($\lnot$A)] (p12) {};
+            \node[btransition, right of=p12,    label=below:deac(A)] (t16) {};
+
+            \path[-latex] (t13) edge node {} (p10);
+            \path[-latex] (p10) edge node {} (t14);
+            \path[-latex] (t14) edge node {} (p11);
+            \path[-latex] (p11) edge[bend left=45] node {} (t16);
+            \path[-latex] (t15) edge node {} (p12);
+            \path[-latex] (p12) edge node {} (t16);
+
+            % Connectivity PART
+
+            %\node[transition,below =2cm of t1,	label=above:req(C)] (t9) {};
+            \node[dplace, below = 1.75cm of p10,					label=below:Pr(C)] (p7) {};
+            \node[btransition, right of=p7,			label=above:act(C)] (t10) {};
+            \node[place, right of=t10,tokens=0,	label=below:C] (p8) {};
+            %\node[transition, right of=p8,			label=above:req($\lnot$C)] (t11) {};
+            \node[dplace, below =1.75cm of p12,					label=below:Pr($\lnot$C)] (p9) {};
+            \node[btransition, right of=p9,			label=below:deac$_1$(C)] (t12) {};
+            \node[btransition, below=1.5cm of t15,     label=below:deac$_2$(C)] (t17) {};
+
+            %\path[-latex] (t9) edge node {} (p7);
+            \path[-latex] (p7) edge node {} (t10);
+            \path[-latex] (t10) edge node {} (p8);
+            \path[-latex] (p8) edge[bend left=45] node {} (t12);
+            %\path[-latex] (t11) edge node {} (p9);
+            \path[-latex] (p9) edge node {} (t12);
+
+            % 3G PART
+
+            \node[transition,below =6cm of t1,	label=above:req(3G)] (t5) {};
+            \node[dplace, right of=t5,					label=below:Pr(3G)] (p4) {};
+            \node[btransition, right of=p4,			label=above:act(3G)] (t6) {};
+            \node[place, right of=t6,tokens=0,	label=below:3G] (p5) {};
+            \node[transition, right of=p5,			label=above:req($\lnot$3G)] (t7) {};
+            \node[dplace, right of=t7,					label=below:Pr($\lnot$3G)] (p6) {};
+            \node[btransition, right of=p6,			label=below:deac(3G)] (t8) {};
+
+            \path[-latex] (t5) edge node {} (p4);
+            \path[-latex] (p4) edge node {} (t6);
+            \path[-latex] (t6) edge node {} (p5);
+            \path[-latex] (p5) edge[bend left=45] node {} (t8);
+            \path[-latex] (t7) edge node {} (p6);
+            \path[-latex] (p6) edge node {} (t8);
+
+            % Connections of Contexts
+
+            \path[-latex] (t2) edge node {} (p7);
+            \path[-latex] (t6) edge node {} (p7);
+            \path[-latex] (t4) edge node {} (p9);
+            \path[-latex] (t8) edge node {} (p9);
+
+
+            % Connections of Contexts
+
+            \path[-latex] (t10) edge node {} (p10);
+            \path[-latex] (t12) edge node {} (p11);
+            \path[-latex] (p11) edge node {} (t12);
+            \path[-latex] (t12) edge node {} (p12);
+            \path[-latex] (p8) edge node {} (t17);
+            \path[-latex] (p9) edge node {} (t17);
+
+            \path[-o] (p11) edge node {} (t17);
+
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}

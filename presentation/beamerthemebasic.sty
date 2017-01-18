@@ -1,0 +1,318 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Florian Thuin
+% 2015
+% https://github.com/fthuin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Ce style est une combinaison des 4 éléments de base de beamer :
+
+% 1. L'intérieur
+% 2. L'extérieur
+% 3. Les couleurs
+% 4. La police
+
+%%%%%%%%%%%%
+% Préambule
+%%%%%%%%%%%%
+
+\mode<presentation>
+\usepackage{pgfcomp-version-0-65}
+\usepackage{color}
+\usepackage{calc}
+\usepackage[scaled=0.92]{helvet} % Police Helvetica rétrécie
+
+\def\logo#1{\def\@logo{#1}}
+\def\abrevinstitute#1{\def\@abrevinstitute{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%         Thème intérieur
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Définit le caractère de la présentation :
+% rectangles or circles or inmargin or rounded
+\useinnertheme{rounded}
+
+% Suppression des ronds autour des chiffres dans la table des matières :
+\setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
+
+% Modification du type de puces pour les listes
+% default or triangle or circle or square or ball
+\setbeamertemplate{itemize items}[triangle]
+
+% Modification de l'encerclement des nombres lors d'énumérations
+% default or circle or square or ball
+\setbeamertemplate{enumerate items}[default]
+
+% Au lieu d'avoir un fond blanc, on peut ajouter un fond
+\setbeamertemplate{background canvas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%         Thème extérieur
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%
+% The outer theme takes the most amount of effort and time to customize.
+
+
+%%%%%%
+% In the outer theme, we will try to do the following:
+%1. Change the headline by putting a logo and a horizontal line
+%2. Change the footline and include custom information depending on our
+%requirements
+%3. Organize the presentation title and the frame titles
+
+
+%%%%%%
+% Let's start with the headline. The approach that we plan to take for
+% the headline and footline is similar.
+% We will first define a new command and then include the command in the
+% \setbeamertemplate{ option.
+% I tried a couple of approaches that would make the method more simple
+% but could not come up with one. In case you do find a more aesthetic
+% approach, please do send it accross. The contact information is on the
+% top of the page.
+
+
+
+% First the horizontal line on the top portion of the slides
+% Add a horizontal line that runs from left of the slide to the right,
+% just below the logo.
+\newcommand{\LogoLine}{%
+  \raisebox{-12mm}[0pt][0pt]{%
+     \begin{pgfpicture}{0mm}{0mm}{0mm}{0mm}
+          \pgfsetlinewidth{0.28mm}
+            \color{gray}
+              \pgfline{\pgfpoint{-3mm}{1mm}}{\pgfpoint{10.8cm}{1mm}}
+              \end{pgfpicture}
+            }
+        }
+
+% Include the line that we just created in the headline
+\setbeamertemplate{headline}[text line]{\LogoLine}
+
+% Now the logo. As it turns out. I could not include the logo in the
+% headline. If I tried to, the headline kept shifting downwards.
+% Acting a little smart and lazy, I just included the logo in the
+% right sidebar and shifted it up.
+\setbeamertemplate{sidebar canvas right}{
+    \vspace*{3pt}\hspace*{-40pt}%
+    {\includegraphics[width=0.1\paperwidth]{\@logo}}}
+
+%%%%%
+% Now that we have changed the headline, we will need to orient
+% the frame titles in a way that the come at the right stop just
+% above the horizontal line.
+\setbeamertemplate{frametitle}{
+    \vspace*{4mm}\hspace*{-2mm}\insertframetitle}
+
+%%%%%
+% Like mentioned above, we will take a similar approach to
+% customize the footline as well and inclued FAA in it.
+\newcommand{\Ffootline}{%
+    \insertsection % The left end of the footline
+    \hfill
+    \textit{\@abrevinstitute} % The center
+    \hfill
+    \insertframenumber/\inserttotalframenumber} % And the right end
+
+\setbeamertemplate{footline}{%
+    \usebeamerfont{structure}
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{title in
+        head/foot}%
+        \tiny\hspace*{4mm} \Ffootline \hspace{4mm}
+    \end{beamercolorbox}}
+
+%%%%%%
+% We will also remove the navigation symbols, which I personally
+% don't find very useful
+\setbeamertemplate{navigation symbols}{}
+
+%%%%%%%%%%%%%%%%%%%%
+%    Page de garde
+%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{title page}{
+    \begin{minipage}{\linewidth}
+        \centering
+        \Large \textbf{\inserttitle}
+
+        \small \textit{\insertsubtitle}
+        \vspace{0.1\paperheight}
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+        \centering
+
+        \vspace{0.1\paperheight}
+        \includegraphics[width=0.6\linewidth]{\@logo}
+
+    \end{minipage}
+    \begin{minipage}{0.05\linewidth}
+        \rule{0.1mm}{0.5\paperheight}
+    \end{minipage}
+    \begin{minipage}{0.35\linewidth}
+        \begin{minipage}{\linewidth}
+            \centering
+
+            \large \insertauthor
+            \vspace{0.03\paperheight}
+
+            \scriptsize \textit{\insertinstitute}
+            \vspace{0.05\paperheight}
+
+            \footnotesize \insertdate
+        \end{minipage}
+    \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     Couleurs du thème
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Les couleurs peuvent être utilisées comme un pourcentage de deux
+% couleurs color1!pourcentage!color2 ou par des valeurs RGB entre 0 et
+% 255.
+
+\definecolor{noir}{RGB}{0,0,0}
+\definecolor{vertfonce}{RGB}{0,98,15}
+\definecolor{olive}{RGB}{128,127,23}
+\definecolor{bleunavy}{RGB}{3,24,127}
+\definecolor{marron}{RGB}{136,15,3}
+\definecolor{vertmer}{RGB}{0,137,89}
+\definecolor{jaune}{RGB}{255,252,47}
+\definecolor{violetrougepale}{RGB}{230,115,147}
+\definecolor{kaki}{RGB}{241,228,143}
+
+% Frame title foreground color = black
+\definecolor{frametitleFGcolor}{RGB}{0,0,0}
+% Frame title background color = white
+\definecolor{frametitleBGcolor}{RGB}{255,255,255}
+
+% Title foreground color = black
+\definecolor{titleFGcolor}{RGB}{0,0,0}
+% Title background color = white
+\definecolor{titleBGcolor}{RGB}{255,255,255}
+
+% Normal text foreground color = black
+\definecolor{normaltextFGcolor}{RGB}{0,0,0}
+
+% Section in table of contents foreground color = black
+\definecolor{sectionInTocFGcolor}{RGB}{0,0,0}
+% Section in table of contents background color = white
+\definecolor{sectionInTocBGcolor}{RGB}{255,255,255}
+
+% Shaded section in table of contents foreground color = black
+\definecolor{shadedSectionInTocFGcolor}{RGB}{0,0,0}
+% Shaded section in table of contents background color = white
+\definecolor{shadedSectionInTocBGcolor}{RGB}{255,255,255}
+
+% Item foreground color = black
+\definecolor{itemFGcolor}{RGB}{0,0,0}
+% Item background color = white
+\definecolor{itemBGcolor}{RGB}{255,255,255}
+
+% Subitem foreground color = black
+\definecolor{subitemFGcolor}{RGB}{0,0,0}
+% Subitem background color = white
+\definecolor{subitemBGcolor}{RGB}{255,255,255}
+
+% Subsubitem foreground color = black
+\definecolor{subsubitemFGcolor}{RGB}{0,0,0}
+% Subsubitem background color = white
+\definecolor{subsubitemBGcolor}{RGB}{255,255,255}
+
+% Description item foreground color = dark blue
+\definecolor{descriptionItemFGcolor}{RGB}{0,0,139}
+% Description item background color = white
+\definecolor{descriptionItemBGcolor}{RGB}{255,255,255}
+
+% Caption foreground color = black
+\definecolor{captionFGcolor}{RGB}{0,0,0}
+% Caption background color = white
+\definecolor{captionBGcolor}{RGB}{255,255,255}
+
+% Caption name foreground color = black
+\definecolor{captionNameFGcolor}{RGB}{0,0,0}
+% Caption name background color = white
+\definecolor{captionNameBGcolor}{RGB}{255,255,255}
+
+% Couleur du dégradé de fond = white
+\definecolor{backgroundTopColor}{RGB}{255,255,255}
+\definecolor{backgroundBottomColor}{RGB}{255,255,255}
+
+% Standard block title (definition or theorem) foreground = dark blue
+\definecolor{blocktitleFGcolor}{RGB}{0,0,139}
+% Standard block title (definition or theorem) background = light blue
+\definecolor{blocktitleBGcolor}{RGB}{221,222,238}
+
+% Standard block body (definition or theorem) background = pale yellow
+\definecolor{blockbodyBGcolor}{RGB}{253,244,243}
+
+% Standard alert block title background color = pale red
+\definecolor{blocktitlealertedBGcolor}{RGB}{255,190,190}
+% Standard alert block body background color = pale yellow
+\definecolor{blockbodyalertedBGcolor}{RGB}{253,244,243}
+
+% Standard example block title background color = pale green
+\definecolor{blocktitleexampleBGcolor}{RGB}{201,217,217}
+% Standard example block body background color = pale yellow
+\definecolor{blockbodyexampleBGcolor}{RGB}{253,244,243}
+
+% Setting the predefined parameter
+\setbeamercolor{frametitle}{fg = frametitleFGcolor, bg =
+frametitleBGcolor}
+\setbeamercolor{title}{fg = titleFGcolor, bg = titleBGcolor}
+\setbeamercolor{normal text}{fg = normaltextFGcolor}
+\setbeamercolor{section in toc}{fg = sectionInTocFGcolor, bg =
+sectionInTocBGcolor}
+\setbeamercolor{section in toc shaded}{fg = shadedSectionInTocFGcolor,
+bg = shadedSectionInTocBGcolor}
+\setbeamercolor{item}{fg = itemFGcolor, bg = itemBGcolor}
+\setbeamercolor{subitem}{fg = subitemFGcolor, bg = subitemBGcolor}
+\setbeamercolor{subsubitem}{fg = subsubitemFGcolor, bg =
+subsubitemBGcolor}
+\setbeamercolor{description item}{fg = descriptionItemFGcolor, bg =
+descriptionItemBGcolor}
+\setbeamercolor{caption}{fg = captionFGcolor, bg = captionBGcolor}
+\setbeamercolor{caption name}{fg = captionNameFGcolor, bg =
+captionNameBGcolor}
+\setbeamercolor{block title}{fg = blocktitleFGcolor, bg =
+blocktitleBGcolor}
+\setbeamercolor{block body}{bg = blockbodyBGcolor}
+\setbeamercolor{block title alerted}{bg = blocktitlealertedBGcolor}
+\setbeamercolor{block body alerted}{bg = blockbodyalertedBGcolor}
+\setbeamercolor{block title example}{bg = blocktitleexampleBGcolor}
+\setbeamercolor{block body example}{bg = blockbodyexampleBGcolor}
+
+% Dégradé de base :
+\setbeamertemplate{background canvas}[vertical shading][top =
+backgroundTopColor, bottom = backgroundBottomColor]
+% Dégradé avancé :
+%\setbeamertemplate{background canvas}[vertical
+%shading]{top=backgroundTopColor, middle=white, midpoint=0.5, bottom =
+%backgroundBottomColor}
+
+% Image de fond de présentation :
+%\stebeamertemplate{background
+%canvas}{\includegraphics[width=\paperwidth,
+%height=\paperheight]{nom_de_limage.png}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%
+%      Police du thème
+%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% Polices par défaut
+\usefonttheme{professionalfonts}
+% Police du titre de la présentation
+\setbeamerfont{title}{size = \huge}
+% Police du titre des slides
+\setbeamerfont{frametitle}{size = \Large}
+
+\mode<all>
