@@ -13,12 +13,12 @@
 
 - This repository contains a presentation made for "Software engineering and programming systems seminar"
     - Very short introduction about context-oriented programming
-    - An explanation of "standard" Petri Nets
+    - An explanation of "standard" Petri nets
     - A discussion about how to model context activation/deactivation with Petri Nets
-    - A discussion about extensions of standard petri nets to be able to model all the dependencies relation between contexts
+    - A discussion about extensions of standard Petri nets to be able to model all the dependencies relation between contexts leading to the concept of Context Petri Nets (CoPN)
     - An animated example to show how contexts interact when there is a disjunction dependency relation between them.
     - An animated example to show how contexts interact when there is a causality dependency relation between them.
-    - A conclusion about the benefits of using Petri Nets and the benefits of having a strong formalism for semantics of context activation and deactivation.
+    - A conclusion about the benefits of using Petri nets and the benefits of having a strong formalism for semantics of context activation and deactivation.
     - Some more examples to show how other context interactions can be modelled.
 
 ## How do I compile the presentation?
