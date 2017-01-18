@@ -1,0 +1,20 @@
+\begin{frame}[noframenumbering]
+	\frametitle{Exclusion between contexts}
+
+	\textbf{Example} A system with 2 contexts:
+
+	\begin{itemize}
+		\item Private context (Priv)
+		\item Positioning context (Pos)
+	\end{itemize}
+
+	If the user doesn't want to share private information, you can't activate
+	the positioning.
+
+	\begin{exampleblock}{Relation type}
+		This conflicting behavior is called an \emph{exclusion dependency relation},
+		denoted \tikz{\scriptsize
+		\node (A) {Priv}; \node[right of = A] (B) {Pos}; \path[open square-open square] (A) edge node {} (B);
+		}
+	\end{exampleblock}
+\end{frame}

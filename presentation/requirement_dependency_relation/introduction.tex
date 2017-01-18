@@ -1,0 +1,22 @@
+\begin{frame}[noframenumbering]
+	\frametitle{Requirement dependency relation}
+
+	\textbf{Example} A system with two contexts:
+
+	\begin{itemize}
+		\item NLBS context (N)
+		\item Connectivity context (C)
+	\end{itemize}
+
+	The position calculation of the NLBS service is based on the location inferred
+	from a local network connection. The source context NLBS \emph{requires} the
+	target context Connectivity.
+
+	\begin{exampleblock}{Relation type}
+		This relation between an activation of a context and an already active context
+		is called a \emph{requirement dependency relation},
+		denoted \tikz{\scriptsize
+		\node (A) {N}; \node[right of = A] (B) {Pos}; \path[-triangle 60 reversed] (A) edge node {} (B);
+		}
+	\end{exampleblock}
+\end{frame}

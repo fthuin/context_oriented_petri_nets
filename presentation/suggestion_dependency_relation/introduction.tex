@@ -1,0 +1,23 @@
+\begin{frame}[noframenumbering]
+	\frametitle{Suggestion dependency relation}
+
+	\textbf{Example} A system (on a phone) with 3 contexts:
+
+	\begin{itemize}
+		\item Meeting context (M)
+		\item Quiet context (Q)
+		\item Noisy context (N)
+	\end{itemize}
+
+	When the user enters a meeting room, the Meeting context is activated.
+	Meetings should be quiet, so incoming calls should be quiet. But this is
+	not a strong constraint: meetings can become quite noisy.
+
+	\begin{exampleblock}{Relation type}
+		There is an exclusion dependency relation between Quiet and Noisy, and
+		there is a \textit{suggestion dependency relation} between Meeting and Quiet,
+		denoted \tikz{\scriptsize
+		\node (A) {M}; \node[right of = A] (B) {Q}; \path[-open triangle 45, dashed] (A) edge node {} (B);
+		}
+	\end{exampleblock}
+\end{frame}

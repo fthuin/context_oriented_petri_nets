@@ -1,0 +1,21 @@
+\begin{frame}[noframenumbering]
+	\frametitle{Implication dependency relation}
+
+	\textbf{Example} A system with 2 contexts:
+
+	\begin{itemize}
+		\item NLBS context (N)
+		\item Positioning context (Pos)
+	\end{itemize}
+
+	NLBS provides services that are explicitly used by Positioning context.
+	Conversely, if the Positioning is deactivated, the services of the NLBS
+	are no longer needed.
+
+	\begin{exampleblock}{Relation type}
+		This containment interaction is called an \textit{implication
+		dependency relation}, denoted \tikz{\scriptsize
+		\node (A) {N}; \node[right of = A] (B) {Pos}; \path[-triangle 45] (A) edge node {} (B);
+		}
+	\end{exampleblock}
+\end{frame}
